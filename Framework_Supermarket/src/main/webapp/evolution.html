@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#submit').click(function() {
+			var requestDto = {
+				targetProjectPath : $('#targetProjectPath').val(),
+				basePackageName : $('#basePackageName').val(),
+				springBoot : $('#springBoot').is(':checked'), 	
+				springMvc : $('#springMvc').is(':checked')
+			};
+			var json = JSON.stringify(requestDto);
+			alert(json);
+		});
+	});
+</script>
+</head>
+<body>
+	<h1>Framework Supermarket</h1>
+	<table>
+		<tr>
+			<td>Target Project Path</td>
+			<td><input id="targetProjectPath" type="text" /></td>
+		</tr>
+		<tr>
+			<td>Base Package Name</td>
+			<td><input id="basePackageName" type="text" /></td>
+		</tr>
+		<tr>
+			<td>SpringBoot</td>
+			<td><input id="springBoot" type="checkbox" /></td>
+		</tr>
+		<tr>
+			<td>SpringMVC</td>
+			<td><input id="springMvc" type="checkbox" /></td>
+		</tr>
+		<tr>
+			<td><input id="submit" type="button" value="Shop" /></td>
+		</tr>
+	</table>
+</body>
+</html>

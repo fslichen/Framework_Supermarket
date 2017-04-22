@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class ShoppingCart {
+	private String targetProjectPath;
+	private String basePackageName;
 	private Boolean springBoot;
 	private Boolean springMvc;	
-	private String targetFolderBasePath;
-	private String packageName;
 }

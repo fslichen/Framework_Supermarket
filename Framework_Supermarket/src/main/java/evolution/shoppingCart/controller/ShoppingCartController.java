@@ -21,14 +21,14 @@ public class ShoppingCartController {
 	public void shop(@RequestBody ShoppingCart shoppingCart) {
 		String sourceProjectPath = System.getProperty("user.dir");
 		String sourceBasePackagePath = sourceProjectPath + "/src/main/java/evolution";
-		String targetProjectPath = shoppingCart.getTargetFolderBasePath();
+		String targetProjectPath = shoppingCart.getTargetProjectPath();
 		String evolution = "evolution";
-		String packageName = shoppingCart.getPackageName();
+		String basePackageName = shoppingCart.getBasePackageName();
 		String javaPath = "/src/main/java/";
 		if (!shoppingCartService.isRequired(shoppingCart.getSpringBoot())) {
 			return;
 		} else if (shoppingCartService.isRequired(shoppingCart.getSpringMvc())) {
-			FileUtil.copy(sourceBasePackagePath + "/controller", FileUtil.createFolders(targetProjectPath, javaPath, packageName, "/controller"), evolution, packageName);
+			FileUtil.copy(sourceBasePackagePath + "/controller", FileUtil.createFolders(targetProjectPath, javaPath, basePackageName, "/controller"), evolution, basePackageName);
 		}
 		FileUtil.copy(new File(sourceProjectPath + "/pom.xml"), new File(targetProjectPath + "/pom.xml"));
 	}
@@ -36,10 +36,10 @@ public class ShoppingCartController {
 	@Test
 	public void test() {
 		ShoppingCart shoppingCart = new ShoppingCart();
-		shoppingCart.setTargetFolderBasePath("/home/chen/Desktop/Buffer/Project");
-		shoppingCart.setSpringMvc(true);
-		shoppingCart.setPackageName("com.evolution");
+		shoppingCart.setTargetProjectPath("/home/chen/Desktop/Buffer/Project");
+		shoppingCart.setBasePackageName("com.evolution");
 		shoppingCart.setSpringBoot(true);
+		shoppingCart.setSpringMvc(true);
 		shop(shoppingCart);
 	}
 }
