@@ -13,19 +13,16 @@
 				springBoot : $('#springBoot').is(':checked'),
 				springMvc : $('#springMvc').is(':checked')
 			};
-			var json = JSON.stringify(requestDto);
-			alert(json);
 			$.ajax({
 				type : 'POST',
 				url : 'http://localhost:8080/shop',
-				data : json,
+				data : JSON.stringify(requestDto),
 				contentType : "application/json;charset=utf-8",
-				dataType : 'json',
 				success : function() {
-					alert('Success');
+					$('#status').html('Success');
 				}, 
 				error : function() {
-					alert('Failure');
+					$('#status').html('Failure');
 				}
 			});
 		});
@@ -53,6 +50,7 @@
 		</tr>
 		<tr>
 			<td><input id="submit" type="button" value="Shop" /></td>
+			<td><p id="status"></p></td>
 		</tr>
 	</table>
 </body>
