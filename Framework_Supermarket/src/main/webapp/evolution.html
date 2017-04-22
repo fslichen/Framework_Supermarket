@@ -3,18 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#submit').click(function() {
 			var requestDto = {
 				targetProjectPath : $('#targetProjectPath').val(),
 				basePackageName : $('#basePackageName').val(),
-				springBoot : $('#springBoot').is(':checked'), 	
+				springBoot : $('#springBoot').is(':checked'),
 				springMvc : $('#springMvc').is(':checked')
 			};
 			var json = JSON.stringify(requestDto);
 			alert(json);
+			$.ajax({
+				type : 'POST',
+				url : 'http://localhost:8080/shop',
+				data : json,
+				contentType : "application/json;charset=utf-8",
+				dataType : 'json',
+				success : function() {
+					alert('Success');
+				}, 
+				error : function() {
+					alert('Failure');
+				}
+			});
 		});
 	});
 </script>
