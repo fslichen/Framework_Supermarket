@@ -1,5 +1,7 @@
 package evolution.shoppingCart.controller;
 
+import java.io.File;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,17 +17,20 @@ public class ShoppingCartController {
 	@Autowired
 	private ShoppingCartService shoppingCartService = new ShoppingCartService();
 	
-	@PostMapping("/copy")
-	public void copy(@RequestBody ShoppingCart shoppingCart) {
-		String sourceFolderBasePath = System.getProperty("user.dir") + "/src/main/java/evolution";
-		String targetFolderBasePath = shoppingCart.getTargetFolderBasePath();
+	@PostMapping("/shop")
+	public void shop(@RequestBody ShoppingCart shoppingCart) {
+		String sourceProjectPath = System.getProperty("user.dir");
+		String sourceBasePackagePath = sourceProjectPath + "/src/main/java/evolution";
+		String targetProjectPath = shoppingCart.getTargetFolderBasePath();
 		String evolution = "evolution";
 		String packageName = shoppingCart.getPackageName();
+		String javaPath = "/src/main/java/";
 		if (!shoppingCartService.isRequired(shoppingCart.getSpringBoot())) {
 			return;
 		} else if (shoppingCartService.isRequired(shoppingCart.getSpringMvc())) {
-			FileUtil.copy(sourceFolderBasePath + "/controller", FileUtil.createFolders(targetFolderBasePath, packageName, "/controller"), evolution, packageName);
+			FileUtil.copy(sourceBasePackagePath + "/controller", FileUtil.createFolders(targetProjectPath, javaPath, packageName, "/controller"), evolution, packageName);
 		}
+		FileUtil.copy(new File(sourceProjectPath + "/pom.xml"), new File(targetProjectPath + "/pom.xml"));
 	}
 	
 	@Test
@@ -35,6 +40,6 @@ public class ShoppingCartController {
 		shoppingCart.setSpringMvc(true);
 		shoppingCart.setPackageName("com.evolution");
 		shoppingCart.setSpringBoot(true);
-		copy(shoppingCart);
+		shop(shoppingCart);
 	}
 }
