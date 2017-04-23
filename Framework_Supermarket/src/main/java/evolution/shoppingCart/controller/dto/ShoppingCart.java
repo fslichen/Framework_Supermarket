@@ -8,4 +8,5 @@ public class ShoppingCart {
 	private String basePackageName;
 	private Boolean springBoot;
 	private Boolean springMvc;	
+	private Boolean myBatis;
 }

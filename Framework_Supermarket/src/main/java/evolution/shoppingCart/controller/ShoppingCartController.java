@@ -19,16 +19,24 @@ public class ShoppingCartController {
 	
 	@PostMapping("/shop")
 	public void shop(@RequestBody ShoppingCart shoppingCart) {
-		String sourceProjectPath = System.getProperty("user.dir");
-		String sourceBasePackagePath = sourceProjectPath + "/src/main/java/evolution";
-		String targetProjectPath = shoppingCart.getTargetProjectPath();
-		String evolution = "evolution";
-		String basePackageName = shoppingCart.getBasePackageName();
-		String javaPath = "/src/main/java/";
 		if (!shoppingCartService.isRequired(shoppingCart.getSpringBoot())) {
 			return;
-		} else if (shoppingCartService.isRequired(shoppingCart.getSpringMvc())) {
-			FileUtil.copy(sourceBasePackagePath + "/controller", FileUtil.createFolders(targetProjectPath, javaPath, basePackageName, "/controller"), evolution, basePackageName);
+		} 
+		String sourceProjectPath = System.getProperty("user.dir");
+		String targetProjectPath = shoppingCart.getTargetProjectPath();
+		String sourceBasePackagePath = sourceProjectPath + "/src/main/java/evolution";
+		String basePackageName = shoppingCart.getBasePackageName();
+		String targetBasePackagePath = FileUtil.createFolders(targetProjectPath, "/src/main/java/", basePackageName);
+		String sourceResourcePath = sourceProjectPath + "/src/main/resources";
+		String targetResourcePath = FileUtil.createFolders(targetProjectPath, "/src/main/resources");
+		FileUtil.copy(new File(sourceBasePackagePath + "/Application.java"), new File(targetBasePackagePath + "/Application.java"));
+		FileUtil.copy(new File(sourceResourcePath + "/application.properties"), new File(targetResourcePath + "/application.properties"));
+		String evolution = "evolution";
+		if (shoppingCartService.isRequired(shoppingCart.getSpringMvc())) {
+			FileUtil.copy(sourceBasePackagePath + "/controller", FileUtil.createFolders(targetBasePackagePath, "/controller"), evolution, basePackageName);
+		}
+		if (shoppingCartService.isRequired(shoppingCart.getMyBatis())) {
+			FileUtil.copy(sourceBasePackagePath + "/mybatis", FileUtil.createFolders(targetBasePackagePath, "/mybatis"), evolution, basePackageName);
 		}
 		FileUtil.copy(new File(sourceProjectPath + "/pom.xml"), new File(targetProjectPath + "/pom.xml"));
 	}
@@ -40,6 +48,7 @@ public class ShoppingCartController {
 		shoppingCart.setBasePackageName("com.evolution");
 		shoppingCart.setSpringBoot(true);
 		shoppingCart.setSpringMvc(true);
+		shoppingCart.setMyBatis(true);
 		shop(shoppingCart);
 	}
 }
