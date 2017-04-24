@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 // This notation is discouraged because it makes refactor harder.
 @MapperScan(basePackages = "evolution.mybatis.mapper")// Scan all the mappers under the mapper package.
 @EnableTransactionManagement
-public class DaoConfiguration {
+public class MyBatisConfiguration {
 	@Value("${dataSource.driver}")// See application.properties
 	private String dataSourceDriver;
 
