@@ -38,17 +38,25 @@ public class ShoppingCartController {
 		if (shoppingCartService.isRequired(shoppingCart.getMyBatis())) {
 			FileUtil.copy(sourceBasePackagePath + "/mybatis", FileUtil.createFolders(targetBasePackagePath, "/mybatis"), evolution, basePackageName);
 		}
+		if (shoppingCartService.isRequired(shoppingCart.getFilter())) {
+			FileUtil.copy(sourceBasePackagePath + "/filter", FileUtil.createFolders(targetBasePackagePath, "/filter"), evolution, basePackageName);
+		}
+		if (shoppingCartService.isRequired(shoppingCart.getInterceptor())) {
+			FileUtil.copy(sourceBasePackagePath + "/interceptor", FileUtil.createFolders(targetBasePackagePath, "/interceptor"), evolution, basePackageName);
+		}
 		FileUtil.copy(new File(sourceProjectPath + "/pom.xml"), new File(targetProjectPath + "/pom.xml"));
 	}
 	
 	@Test
 	public void test() {
 		ShoppingCart shoppingCart = new ShoppingCart();
-		shoppingCart.setTargetProjectPath("/home/chen/Desktop/Buffer/Project");
+		shoppingCart.setTargetProjectPath("/Users/chenli/Desktop/Project");
 		shoppingCart.setBasePackageName("com.evolution");
 		shoppingCart.setSpringBoot(true);
 		shoppingCart.setSpringMvc(true);
 		shoppingCart.setMyBatis(true);
+		shoppingCart.setFilter(true);
+		shoppingCart.setInterceptor(true);
 		shop(shoppingCart);
 	}
 }

@@ -11,7 +11,9 @@
 				targetProjectPath : $('#targetProjectPath').val(),
 				basePackageName : $('#basePackageName').val(),
 				springBoot : $('#springBoot').is(':checked'),
-				springMvc : $('#springMvc').is(':checked')
+				springMvc : $('#springMvc').is(':checked'),
+				filter : $('#filter').is(':checked'),
+				interceptor : $('#interceptor').is(':checked')
 			};
 			$.ajax({
 				type : 'POST',
@@ -47,6 +49,14 @@
 		<tr>
 			<td>SpringMVC</td>
 			<td><input id="springMvc" type="checkbox" /></td>
+		</tr>
+		<tr>
+			<td>Filter</td>
+			<td><input id="filter" type="checkbox" /></td>
+		</tr>
+		<tr>
+			<td>Interceptor</td>
+			<td><input id="interceptor" type="checkbox" /></td>
 		</tr>
 		<tr>
 			<td><input id="submit" type="button" value="Shop" /></td>

@@ -9,7 +9,25 @@ public class ShoppingCart {
 	private Boolean springBoot;
 	private Boolean springMvc;
 	private Boolean myBatis;
+	private Boolean filter;
+	private Boolean interceptor;
 	
+	public Boolean getFilter() {
+		return filter;
+	}
+
+	public void setFilter(Boolean filter) {
+		this.filter = filter;
+	}
+
+	public Boolean getInterceptor() {
+		return interceptor;
+	}
+
+	public void setInterceptor(Boolean interceptor) {
+		this.interceptor = interceptor;
+	}
+
 	public String getBasePackageName() {
 		return basePackageName;
 	}
@@ -48,11 +66,12 @@ public class ShoppingCart {
 	
 	public void setTargetProjectPath(String targetProjectPath) {
 		this.targetProjectPath = targetProjectPath;
-	}	
-	
+	}
+
 	@Override
 	public String toString() {
 		return "ShoppingCart [targetProjectPath=" + targetProjectPath + ", basePackageName=" + basePackageName
-				+ ", springBoot=" + springBoot + ", springMvc=" + springMvc + ", myBatis=" + myBatis + "]";
-	}
+				+ ", springBoot=" + springBoot + ", springMvc=" + springMvc + ", myBatis=" + myBatis + ", filter="
+				+ filter + ", interceptor=" + interceptor + "]";
+	}	
 }
